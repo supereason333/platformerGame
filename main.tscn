@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvmpvk5h5l61a"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_jskns"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_jskns")
+
+[node name="PlayButton" type="Button" parent="."]
+offset_left = 472.0
+offset_top = 145.0
+offset_right = 684.0
+offset_bottom = 272.0
+tooltip_text = "This is the play button"
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 472.0
+offset_top = 378.0
+offset_right = 684.0
+offset_bottom = 505.0
+tooltip_text = "This is quit button"
+text = "Quit"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
