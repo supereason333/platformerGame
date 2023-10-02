@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dptopknkmvtbv"]
+
+[ext_resource type="Texture2D" uid="uid://bh8esl5xx0ys0" path="res://backgrounds/bg_grad1.png" id="1_86ig6"]
+[ext_resource type="Script" path="res://backgrounds/factoryBG.gd" id="1_i45hm"]
+[ext_resource type="Texture2D" uid="uid://dug1300mwgxpq" path="res://backgrounds/bg_factory1.png" id="2_4d66u"]
+
+[node name="factoryBG" type="ParallaxBackground"]
+script = ExtResource("1_i45hm")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(2.08165e-12, 2.08165e-12)
+motion_mirroring = Vector2(1162, 2.08165e-12)
+
+[node name="BgGrad1" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(583, 332)
+scale = Vector2(2.905, 4.2125)
+texture = ExtResource("1_86ig6")
+metadata/_edit_lock_ = true
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(1263, 1000)
+
+[node name="BgFactory1" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(632, 257)
+scale = Vector2(3.15938, 3.15938)
+texture = ExtResource("2_4d66u")
