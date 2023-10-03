@@ -9,13 +9,12 @@ script = ExtResource("1_i45hm")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(2.08165e-12, 2.08165e-12)
-motion_mirroring = Vector2(1162, 2.08165e-12)
+motion_mirroring = Vector2(1163, 2.08165e-12)
 
 [node name="BgGrad1" type="Sprite2D" parent="ParallaxLayer"]
-position = Vector2(583, 332)
-scale = Vector2(2.905, 4.2125)
+position = Vector2(581.5, 337)
+scale = Vector2(2.9075, 4.2125)
 texture = ExtResource("1_86ig6")
-metadata/_edit_lock_ = true
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0.6, 0.6)

@@ -272,6 +272,8 @@ metadata/_edit_lock_ = true
 zoom = Vector2(1.6, 1.6)
 limit_left = 0
 limit_top = 0
+limit_right = 1200
+limit_smoothed = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Camera2D")
