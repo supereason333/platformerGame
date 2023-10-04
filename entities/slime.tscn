@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://bfu3u46x8bswc"]
+
+[ext_resource type="Script" path="res://entities/slime.gd" id="1_bcter"]
+[ext_resource type="Texture2D" uid="uid://buvk4o3lvu0bv" path="res://sprites/entities/slime/death/death1.png" id="1_jkifd"]
+[ext_resource type="Texture2D" uid="uid://ckl5hewos5k06" path="res://sprites/entities/slime/death/death2.png" id="2_sxdpg"]
+[ext_resource type="Texture2D" uid="uid://cqduypqikurbu" path="res://sprites/entities/slime/idle/idle1.png" id="3_tkt12"]
+[ext_resource type="Texture2D" uid="uid://muxpwi7d6dtu" path="res://sprites/entities/slime/idle/idle2.png" id="4_wy5ty"]
+[ext_resource type="Texture2D" uid="uid://bo50qg7q8b4pt" path="res://sprites/entities/slime/jump/jump1.png" id="5_8gm63"]
+[ext_resource type="Texture2D" uid="uid://ik1krr83lq8e" path="res://sprites/entities/slime/jump/jump2.png" id="6_kcvgp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3kkq2"]
+size = Vector2(17, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mor0i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jkifd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_sxdpg")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_tkt12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wy5ty")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_8gm63")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kcvgp")
+}],
+"loop": false,
+"name": &"Jump",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_tkt12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wy5ty")
+}],
+"loop": true,
+"name": &"PreJump",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t1mlt"]
+radius = 169.003
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjjlp"]
+size = Vector2(16, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1mctd"]
+size = Vector2(30, 6)
+
+[node name="slime" type="CharacterBody2D"]
+script = ExtResource("1_bcter")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 7)
+shape = SubResource("RectangleShape2D_3kkq2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(1.78947, 1.78947)
+sprite_frames = SubResource("SpriteFrames_mor0i")
+animation = &"Idle"
+
+[node name="player detector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player detector"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_t1mlt")
+
+[node name="hit detector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit detector"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_wjjlp")
+
+[node name="player killer" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player killer"]
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_1mctd")
+
+[connection signal="body_entered" from="player detector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="player detector" to="." method="_on_player_detector_body_exited"]
+[connection signal="body_entered" from="hit detector" to="." method="_on_hit_detector_body_entered"]
+[connection signal="body_entered" from="player killer" to="." method="_on_player_killer_body_entered"]
