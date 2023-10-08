@@ -66,6 +66,7 @@ func _on_player_killer_body_entered(body):
 func kill():
 	alive = false
 	anim.play("Death")
+	Game.playerGold += 5
 	gravity = 0
 	velocity.x = 0
 	get_node("player killer/CollisionShape2D").scale.x = 0
