@@ -16,23 +16,22 @@ var alive = true
 func _physics_process(delta):
 	velocity.y += gravity * delta
 	move_and_slide()
+	animation = "Idle"
+	if attacking:
+		animation = "PreJump"
+		charge += 1
+	if charge >= CHARGE_MAX and alive:
+		velocity.y = JUMP_VELOCITY * abs((player.position.x - position.x) * 0.01)
+		charge = 0
+	if !is_on_floor() and alive:
+		velocity.x = SPEED * directionx
+	else:
+		velocity.x = 0
+		
+	if velocity.y < 0:
+		animation = "Jump"
 	if alive:
-		animation = "Idle"
-		if attacking:
-			animation = "PreJump"
-			charge += 1
-		if charge >= CHARGE_MAX:
-			velocity.y = JUMP_VELOCITY * abs((player.position.x - position.x) * 0.01)
-			charge = 0
-		if !is_on_floor():
-			velocity.x = SPEED * directionx
-		else:
-			velocity.x = 0
-			
-		if velocity.y < 0:
-			animation = "Jump"
-		if alive:
-			anim.play(animation)
+		anim.play(animation)
 
 func _ready():
 	anim.play("Idle")
@@ -61,7 +60,8 @@ func _on_hit_detector_body_entered(body):
 func _on_player_killer_body_entered(body):
 	if body.name == "player":
 		get_node("../../player").damage(3)
-		kill()
+		velocity.y = -100
+		directionx *= -1
 		
 func kill():
 	alive = false
