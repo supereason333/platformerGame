@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 const SAVE_PATH = "res://savegame.bin"
 var autosave_time = 0
@@ -18,11 +18,27 @@ func save_game():
 	}
 	var jstr = JSON.stringify(dictionary)
 	file.store_line(jstr)
+	file.close()
+	print_debug("Game Saved")
 
 func load_game():
 	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
-	if FileAccess.file_exists(SAVE_PATH) and !file.eof_reached():
+	print_debug(file.get_line())
+	if FileAccess.file_exists(SAVE_PATH) and !file.eof_reached() and "deleted" not in file.get_line():
 		var current_line = JSON.parse_string(file.get_line())
 		if current_line:
 			Game.playerHP = current_line["playerHP"]
 			Game.playerGold = current_line["playerGold"]
+			print_debug("Game Loaded")
+	file.close()
+
+func remove_save():
+	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	var dictionary: Dictionary = {
+		"playerHP": 10,
+		"playerGold": 0,
+	}
+	var jstr = JSON.stringify(dictionary)
+	file.store_line(jstr)
+	file.close()
+	print_debug("Deleted Save")
