@@ -9,6 +9,3 @@ func _on_play_button_pressed():
 
 func _ready():
 	Utils.load_game()
-
-func _on_delete_save_button_pressed():
-	Utils.remove_save()
